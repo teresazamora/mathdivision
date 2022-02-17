@@ -2,80 +2,73 @@ package com.foxminded;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class Divisiontest {
 
-    Division division;
+   Division division;
+   
 
     @BeforeEach
     void setUp() {
         division = new Division();
     }
 
-    @Test
-    public void DivisorIsZeroThrowException() {
 
+    @Test
+    public void givenZeroDivisor_whenDivide_thenIllegalArgumentExceptionThrown() {
         assertThrows(IllegalArgumentException.class, () -> {
             division.divide(2, 0);
         });
     }
 
     @Test
-    public void DividerIsMoreThaDividend_whenDivide_thenThrowException() {
-        
+    public void givenDividerGraterThanDividend_whenDivide_thenIllegalArgumentExceptionThrown() {
         assertThrows(IllegalArgumentException.class, () -> {
             division.divide(2, 4);
         });
     }
 
     @Test
-    public void DivisionWithoutReminderTheLastMinuendWillBeZero() {
-        
+    public void giverTwoNumbersWithoutReminder_whenDivide_thenTheLastMinuendWillBeZero() {
         DivisionResult expected = new DivisionResult();
+        List<DivisionStep> steps = new ArrayList<>();
+        DivisionStep step = new DivisionStep();
+        step.setMinuend(25);
+        step.setSubtrahend(25);
+        steps.add(step);
+
         expected.setDividend(25);
         expected.setDivider(5);
         expected.setQuotient(5);
-        expected.setMinuend("25");
-        expected.setSubtrahend("25");
-        expected.setMinuend("0");
+        expected.addSteps(steps);
+        expected.setReminder(0);
+
         DivisionResult actual = division.divide(25, 5);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void DivisionWithBigNumbers() {
-        
+    public void givenNegativeDividend_whenDivide_thenItWillBeTrasformInPositive() {
         DivisionResult expected = new DivisionResult();
-        expected.setDividend(54823);
-        expected.setDivider(47);
-        expected.setQuotient(1166);
-        expected.setMinuend("54");
-        expected.setSubtrahend("47");
-        expected.setMinuend("78");
-        expected.setSubtrahend("47");
-        expected.setMinuend("312");
-        expected.setSubtrahend("282");
-        expected.setMinuend("303");
-        expected.setSubtrahend("282");
-        expected.setMinuend("21");
-        DivisionResult actual = division.divide(54823, 47);
+        DivisionStep step = new DivisionStep();
+        List<DivisionStep> steps = new ArrayList<>();
 
-        assertEquals(expected, actual);
-    }
+        step.setMinuend(21);
+        step.setSubtrahend(21);
+        steps.add(step);
 
-    @Test
-    public void DivisionWithNegativeDividendWillBeTrasformInPositive() {
-        
-        DivisionResult expected = new DivisionResult();
         expected.setDividend(21);
         expected.setDivider(3);
         expected.setQuotient(7);
-        expected.setMinuend("21");
-        expected.setSubtrahend("21");
-        expected.setMinuend("0");
+        expected.addSteps(steps);
+        expected.setReminder(0);
+
         DivisionResult actual = division.divide(-21, 3);
 
         assertEquals(expected, actual);

@@ -1,85 +1,83 @@
 package com.foxminded;
 
+import java.util.List;
+
 public class DivisionFormatter {
 
     public String format(DivisionResult result) {
 
         String dividend = String.valueOf(result.getDividend());
-        String divider = String.valueOf(result.getDivider());
+
+        String divisor = String.valueOf(result.getDivider());
+
+        List<DivisionStep> steps = result.getSteps();
 
         StringBuilder resultString = new StringBuilder();
+        
 
-        resultString.append(getFirstLine(dividend, divider));
-        resultString.append(getSecondLine(dividend, result));
-        resultString.append(getThirdLine(dividend, result));
+        resultString.append(getFirstLine(dividend, divisor));
+        resultString.append(getSecondLine(dividend, result, steps));
+        resultString.append(getThirdLine(dividend, result, steps));
 
-        int j = result.getMinuend().get(0).length();
-        for (int i = 1; i < result.getMinuend().size() - 1; i++) {
+        int j = String.valueOf(steps.get(0).getMinuend()).length();
+        for (int i = 1; i < steps.size() - 1; i++) {
 
-            String minuendLine = result.getMinuend().get(i);
-            String subtrahendLine = result.getSubtrahend().get(i);
+            String minuendLine = String.valueOf(steps.get(i).getMinuend());
+            String subtrahendLine = String.valueOf(steps.get(i).getSubtrahend());
 
-            resultString.append(String.format("%" + (j + 3) + "s", "_" + minuendLine + "\n"));
-            resultString.append(String.format("%" + (j + 2) + "s", subtrahendLine) + "\n");
-            resultString
-                    .append(String.format("%" + (j + 2) + "s", repeatCharacter('-', subtrahendLine.length())) + "\n");
+            resultString.append(String.format("%" + (j + 3) + "s", "_" + minuendLine + System.lineSeparator()));
+            resultString.append(String.format("%" + (j + 2) + "s", subtrahendLine) + System.lineSeparator());
+            resultString.append(String.format("%" + (j + 2) + "s", repeatCharracter('-', subtrahendLine.length()))
+                    + System.lineSeparator());
             j++;
         }
-
-        resultString.append(getLastSubtrahen(dividend, result));
-
+        resultString.append(getLastLine(dividend, result, steps));
         return resultString.toString();
     }
 
-    private String repeatCharacter(char character, int times) {
+    private String repeatCharracter(char character, int times) {
 
-        StringBuilder resulting = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < times; i++) {
-            resulting.append(character);
+            result.append(character);
         }
-        return resulting.toString();
+        return result.toString();
     }
 
     private StringBuilder getFirstLine(String dividend, String divisor) {
 
         StringBuilder firstLine = new StringBuilder();
-
-        firstLine.insert(0, "_" + dividend + "|" + divisor + "\n");
-
+        firstLine.insert(0, "_" + dividend + "|" + divisor + System.lineSeparator());
         return firstLine;
     }
 
-    private StringBuilder getSecondLine(String dividend, DivisionResult result) {
+    private StringBuilder getSecondLine(String dividend, DivisionResult result, List<DivisionStep> steps) {
 
         StringBuilder secondLine = new StringBuilder();
-        String firstSubtrahend = result.getSubtrahend().get(0);
-        int calculateDigit = dividend.length() - firstSubtrahend.length();
+        String firstSubtrahend = String.valueOf(steps.get(0).getSubtrahend());
+        int calculateDigitsSubtrahend = dividend.length() - firstSubtrahend.length();
 
-        secondLine.insert(0, " " + firstSubtrahend + repeatCharacter(' ', calculateDigit) + "|"
-                + repeatCharacter('-', result.getQuotient().length()) + "\n");
+        secondLine.insert(0, " " + firstSubtrahend + repeatCharracter(' ', calculateDigitsSubtrahend) + "|"
+                + repeatCharracter('-', String.valueOf(result.getQuotient()).length()) + System.lineSeparator());
 
         return secondLine;
     }
 
-    private StringBuilder getThirdLine(String dividend, DivisionResult result) {
+    private StringBuilder getThirdLine(String dividend, DivisionResult result, List<DivisionStep> steps) {
 
         StringBuilder thirdLine = new StringBuilder();
-        int firstMinuend = result.getMinuend().get(0).length();
-        int calculateDigit = dividend.length() - result.getMinuend().get(0).length();
-
-        thirdLine.insert(0, " " + repeatCharacter('-', firstMinuend) + repeatCharacter(' ', calculateDigit) + "|"
-                + result.getQuotient() + "\n");
+        int firstMinuend = String.valueOf(steps.get(0).getMinuend()).length();
+        int calculateDigitsMinuend = dividend.length() - firstMinuend;
+        thirdLine.insert(0, " " + repeatCharracter('-', firstMinuend) + repeatCharracter(' ', calculateDigitsMinuend) + "|"
+                + result.getQuotient() + System.lineSeparator());
 
         return thirdLine;
     }
 
-    private StringBuilder getLastSubtrahen(String dividend, DivisionResult result) {
+    private StringBuilder getLastLine(String dividend, DivisionResult result, List<DivisionStep> steps) {
 
-        StringBuilder lastSubtrahen = new StringBuilder();
-        lastSubtrahen.insert(0,
-                repeatCharacter(' ', dividend.length()) + result.getMinuend().get(result.getMinuend().size() - 1));
-
-        return lastSubtrahen;
+        StringBuilder lastLine = new StringBuilder();
+        lastLine.insert(0, repeatCharracter(' ', dividend.length()) + String.valueOf(result.getReminder()));
+        return lastLine;
     }
-
 }

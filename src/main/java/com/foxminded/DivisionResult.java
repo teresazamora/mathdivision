@@ -1,59 +1,53 @@
 package com.foxminded;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DivisionResult {
 
     private int dividend;
     private int divider;
-    private ArrayList<String> minuend = new ArrayList<String>();
-    private ArrayList<String> subtrahend = new ArrayList<String>();
-    private StringBuilder quotient = new StringBuilder();
+    private int reminder;
+    private List<DivisionStep> steps;
+    private int quotient;
 
     public int getDividend() {
-
         return dividend;
     }
 
     public void setDividend(int dividend) {
-
         this.dividend = dividend;
+    }
+    
+    public int getReminder() {
+        return reminder;
+    }
+    
+    public void setReminder(int reminder) {
+        this.reminder=reminder;
     }
 
     public int getDivider() {
-
         return divider;
     }
 
     public void setDivider(int divider) {
-
         this.divider = divider;
     }
 
-    public ArrayList<String> getMinuend() {
-
-        return minuend;
+    public List<DivisionStep> getSteps() {
+        return steps;
     }
 
-    public void setMinuend(String minuend) {
-
-        this.minuend.add(minuend);
+    public void addSteps(List<DivisionStep> steps) {
+        this.steps = steps;
     }
 
-    public ArrayList<String> getSubtrahend() {
-        return subtrahend;
-    }
-
-    public void setSubtrahend(String subtrahend) {
-        this.subtrahend.add(subtrahend);
-    }
-
-    public StringBuilder getQuotient() {
+    public int getQuotient() {
         return quotient;
     }
 
     public void setQuotient(int quotient) {
-        this.quotient.append(quotient);
+        this.quotient = quotient;
     }
 
     @Override
@@ -69,23 +63,16 @@ public class DivisionResult {
             return false;
         if (divider != other.divider)
             return false;
-        if (minuend == null) {
-            if (other.minuend != null)
-                return false;
-        } else if (!minuend.equals(other.minuend))
+
+        if (quotient != other.quotient)
             return false;
-        if (quotient == null) {
-            if (other.quotient != null)
-                return false;
-        } else if (!quotient.toString().equals(other.quotient.toString()))
+        
+        if (reminder != other.reminder)
             return false;
+
         if (dividend < divider)
             return false;
-        if (subtrahend == null) {
-            if (other.subtrahend != null)
-                return false;
-        } else if (!subtrahend.equals(other.subtrahend))
-            return false;
+
         return true;
     }
 }

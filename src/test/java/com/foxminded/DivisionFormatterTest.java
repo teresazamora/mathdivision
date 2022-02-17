@@ -16,12 +16,11 @@ class DivisionFormatterTest {
     }
 
     @Test
-    public void NegativeDividendPositiveQuotient() {
-        
+    public void givenNegativeDividend_whenDivide_thenWIllBePositiveQuotient() {
         StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("_90|14").append("\n");
-        expectedResult.append(" 84|-").append("\n");
-        expectedResult.append(" --|6").append("\n");
+        expectedResult.append("_90|14").append(System.lineSeparator());
+        expectedResult.append(" 84|-").append(System.lineSeparator());
+        expectedResult.append(" --|6").append(System.lineSeparator());
         expectedResult.append("  6");
         String actualResult = formatter.format(division.divide(-90, 14));
 
@@ -29,12 +28,11 @@ class DivisionFormatterTest {
     }
 
     @Test
-    public void NegativeDividerPositiveQuotient() {
-        
+    public void givenNegativeDivider_whenDivide_thenWillBePositiveQuotient() {
         StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("_90|14").append("\n");
-        expectedResult.append(" 84|-").append("\n");
-        expectedResult.append(" --|6").append("\n");
+        expectedResult.append("_90|14").append(System.lineSeparator());
+        expectedResult.append(" 84|-").append(System.lineSeparator());
+        expectedResult.append(" --|6").append(System.lineSeparator());
         expectedResult.append("  6");
         String actualResult = formatter.format(division.divide(90, -14));
 
@@ -42,12 +40,11 @@ class DivisionFormatterTest {
     }
 
     @Test
-    public void DividendAndDivisorConsistOfOneDigig() {
-        
+    public void givenSmallNumbers_whenDivide_thenDivisionWillHaveFewSteps() {
         StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("_4|3").append("\n");
-        expectedResult.append(" 3|-").append("\n");
-        expectedResult.append(" -|1").append("\n");
+        expectedResult.append("_4|3").append(System.lineSeparator());
+        expectedResult.append(" 3|-").append(System.lineSeparator());
+        expectedResult.append(" -|1").append(System.lineSeparator());
         expectedResult.append(" 1");
         String actualResult = formatter.format(division.divide(4, 3));
 
@@ -55,12 +52,11 @@ class DivisionFormatterTest {
     }
 
     @Test
-    public void DivisionWithoutReminder() {
-        
+    public void givenTwoNumbersWithoutReminder_whenDivide_thenDivisionWithoutReminder() {
         StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("_4|2").append("\n");
-        expectedResult.append(" 4|-").append("\n");
-        expectedResult.append(" -|2").append("\n");
+        expectedResult.append("_4|2").append(System.lineSeparator());
+        expectedResult.append(" 4|-").append(System.lineSeparator());
+        expectedResult.append(" -|2").append(System.lineSeparator());
         expectedResult.append(" 0");
         String actualResult = formatter.format(division.divide(4, 2));
 
@@ -68,21 +64,20 @@ class DivisionFormatterTest {
     }
 
     @Test
-    public void DividendAndDividerAreBigNumbers() {
-        
+    public void givenBigNumbers_whenDivide_thenDivisionWillHaveMoreSteps() {
         StringBuilder expectedResult = new StringBuilder();
-        expectedResult.append("_54823|47").append("\n");
-        expectedResult.append(" 47   |----").append("\n");
-        expectedResult.append(" --   |1166").append("\n");
-        expectedResult.append(" _78").append("\n");
-        expectedResult.append("  47").append("\n");
-        expectedResult.append("  --").append("\n");
-        expectedResult.append(" _312").append("\n");
-        expectedResult.append("  282").append("\n");
-        expectedResult.append("  ---").append("\n");
-        expectedResult.append("  _303").append("\n");
-        expectedResult.append("   282").append("\n");
-        expectedResult.append("   ---").append("\n");
+        expectedResult.append("_54823|47").append(System.lineSeparator());
+        expectedResult.append(" 47   |----").append(System.lineSeparator());
+        expectedResult.append(" --   |1166").append(System.lineSeparator());
+        expectedResult.append(" _78").append(System.lineSeparator());
+        expectedResult.append("  47").append(System.lineSeparator());
+        expectedResult.append("  --").append(System.lineSeparator());
+        expectedResult.append(" _312").append(System.lineSeparator());
+        expectedResult.append("  282").append(System.lineSeparator());
+        expectedResult.append("  ---").append(System.lineSeparator());
+        expectedResult.append("  _303").append(System.lineSeparator());
+        expectedResult.append("   282").append(System.lineSeparator());
+        expectedResult.append("   ---").append(System.lineSeparator());
         expectedResult.append("     21");
         String actualResult = formatter.format(division.divide(54823, 47));
 

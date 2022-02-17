@@ -1,8 +1,13 @@
 package com.foxminded;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Division {
 
     public DivisionResult divide(int dividend, int divider) {
+
+        List<DivisionStep> steps = new ArrayList<>();
 
         DivisionResult divisionResult = new DivisionResult();
 
@@ -19,9 +24,10 @@ public class Division {
         StringBuilder reminder = new StringBuilder();
 
         divisionResult.setQuotient(dividend / divider);
-
         divisionResult.setDividend(dividend);
         divisionResult.setDivider(divider);
+        divisionResult.addSteps(steps);
+        divisionResult.setReminder(dividend % divider);
 
         String[] digitsOfDividend = String.valueOf(dividend).split("");
         for (int i = 0; i < digitsOfDividend.length; i++) {
@@ -32,14 +38,30 @@ public class Division {
                 int mod = interimReminder % divider;
                 int multiplicationResult = interimReminder / divider * divider;
 
-                divisionResult.setMinuend(String.valueOf(interimReminder));
-                divisionResult.setSubtrahend(String.valueOf(multiplicationResult));
+                int minuend = interimReminder;
+                int subtrahend = multiplicationResult;
+
+                DivisionStep step = new DivisionStep();
+
+                step.setMinuend(minuend);
+                step.setSubtrahend(subtrahend);
+
+                steps.add(step);
 
                 reminder.replace(0, reminder.length(), String.valueOf(mod));
+
                 interimReminder = Integer.parseInt(reminder.toString());
             }
+
             if (i == digitsOfDividend.length - 1) {
-                divisionResult.setMinuend(String.valueOf(interimReminder));
+
+                int minuend = interimReminder;
+
+                DivisionStep step = new DivisionStep();
+
+                step.setMinuend(minuend);
+                steps.add(step);
+
             }
         }
         return divisionResult;
