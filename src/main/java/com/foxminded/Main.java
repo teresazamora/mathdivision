@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
         Division division = new Division();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your divident: ");

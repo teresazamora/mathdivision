@@ -6,22 +6,18 @@ public class DivisionStep {
     private int subtrahend;
 
     public void setMinuend(int minuend) {
-
         this.minuend = minuend;
     }
 
     public void setSubtrahend(int subtrahend) {
-
         this.subtrahend = subtrahend;
     }
 
     public int getMinuend() {
-
         return minuend;
     }
 
     public int getSubtrahend() {
-
         return subtrahend;
     }
 

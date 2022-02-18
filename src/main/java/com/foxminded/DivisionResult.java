@@ -17,13 +17,13 @@ public class DivisionResult {
     public void setDividend(int dividend) {
         this.dividend = dividend;
     }
-    
+
     public int getReminder() {
         return reminder;
     }
-    
+
     public void setReminder(int reminder) {
-        this.reminder=reminder;
+        this.reminder = reminder;
     }
 
     public int getDivider() {
@@ -66,7 +66,7 @@ public class DivisionResult {
 
         if (quotient != other.quotient)
             return false;
-        
+
         if (reminder != other.reminder)
             return false;
 

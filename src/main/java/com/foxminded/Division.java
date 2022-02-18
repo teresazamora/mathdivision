@@ -54,14 +54,12 @@ public class Division {
             }
 
             if (i == digitsOfDividend.length - 1) {
-
                 int minuend = interimReminder;
 
                 DivisionStep step = new DivisionStep();
 
                 step.setMinuend(minuend);
                 steps.add(step);
-
             }
         }
         return divisionResult;

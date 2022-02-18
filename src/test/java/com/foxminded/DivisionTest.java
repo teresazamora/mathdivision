@@ -8,16 +8,14 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Divisiontest {
+public class DivisionTest {
 
-   Division division;
-   
+    Division division;
 
     @BeforeEach
     void setUp() {
         division = new Division();
     }
-
 
     @Test
     public void givenZeroDivisor_whenDivide_thenIllegalArgumentExceptionThrown() {

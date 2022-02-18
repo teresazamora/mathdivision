@@ -78,8 +78,26 @@ class DivisionFormatterTest {
         expectedResult.append("  _303").append(System.lineSeparator());
         expectedResult.append("   282").append(System.lineSeparator());
         expectedResult.append("   ---").append(System.lineSeparator());
-        expectedResult.append("     21");
+        expectedResult.append("    21");
         String actualResult = formatter.format(division.divide(54823, 47));
+
+        assertEquals(expectedResult.toString(), actualResult);
+    }
+
+    @Test
+    public void givenNumberWithManyZeroInTheMiddle_whenDivide_thenDivisionWillHaveMoreSteps() {
+        StringBuilder expectedResult = new StringBuilder();
+        expectedResult.append("_10010010|10").append(System.lineSeparator());
+        expectedResult.append(" 10      |-------").append(System.lineSeparator());
+        expectedResult.append(" --      |1001001").append(System.lineSeparator());
+        expectedResult.append(" _10").append(System.lineSeparator());
+        expectedResult.append("  10").append(System.lineSeparator());
+        expectedResult.append("  --").append(System.lineSeparator());
+        expectedResult.append("  _10").append(System.lineSeparator());
+        expectedResult.append("   10").append(System.lineSeparator());
+        expectedResult.append("   --").append(System.lineSeparator());
+        expectedResult.append("    0");
+        String actualResult = formatter.format(division.divide(10010010, 10));
 
         assertEquals(expectedResult.toString(), actualResult);
     }
