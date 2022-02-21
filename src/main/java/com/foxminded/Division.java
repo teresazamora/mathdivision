@@ -5,63 +5,69 @@ import java.util.List;
 
 public class Division {
 
-    public DivisionResult divide(int dividend, int divider) {
+	public DivisionResult divide(int dividend, int divider) {
 
-        List<DivisionStep> steps = new ArrayList<>();
+		List<DivisionStep> steps = new ArrayList<>();
 
-        DivisionResult divisionResult = new DivisionResult();
+		DivisionResult divisionResult = new DivisionResult();
 
-        dividend = Math.abs(dividend);
-        divider = Math.abs(divider);
+		dividend = Math.abs(dividend);
+		divider = Math.abs(divider);
 
-        if (divider == 0) {
-            throw new IllegalArgumentException("Divisor can't be 0, division by zero, try again");
-        }
-        if (dividend < divider) {
-            throw new IllegalArgumentException("Divider can't be more than dividend, try again");
-        }
+		if (divider == 0) {
+			throw new IllegalArgumentException("Divisor can't be 0, division by zero, try again");
+		}
+		if (dividend < divider) {
+			throw new IllegalArgumentException("Divider can't be more than dividend, try again");
+		}
 
-        StringBuilder reminder = new StringBuilder();
+		StringBuilder reminder = new StringBuilder();
 
-        divisionResult.setQuotient(dividend / divider);
-        divisionResult.setDividend(dividend);
-        divisionResult.setDivider(divider);
-        divisionResult.addSteps(steps);
-        divisionResult.setReminder(dividend % divider);
+		divisionResult.setQuotient(dividend / divider);
+		divisionResult.setDividend(dividend);
+		divisionResult.setDivider(divider);
+		divisionResult.addSteps(steps);
+		divisionResult.setReminder(dividend % divider);
 
-        String[] digitsOfDividend = String.valueOf(dividend).split("");
-        for (int i = 0; i < digitsOfDividend.length; i++) {
-            reminder.append(digitsOfDividend[i]);
-            int interimReminder = Integer.parseInt(reminder.toString());
+		String[] digitsOfDividend = String.valueOf(dividend).split("");
+		for (int i = 0; i < digitsOfDividend.length; i++) {
+			reminder.append(digitsOfDividend[i]);
+			int interimReminder = Integer.parseInt(reminder.toString());
+			if (interimReminder == 0) {
+				int minuend = interimReminder;
 
-            if (interimReminder >= divider) {
-                int mod = interimReminder % divider;
-                int multiplicationResult = interimReminder / divider * divider;
+				DivisionStep step = new DivisionStep();
 
-                int minuend = interimReminder;
-                int subtrahend = multiplicationResult;
+				step.setMinuend(minuend);
+				steps.add(step);
+			}
+			if (interimReminder >= divider) {
+				int mod = interimReminder % divider;
+				int multiplicationResult = interimReminder / divider * divider;
 
-                DivisionStep step = new DivisionStep();
+				int minuend = interimReminder;
+				int subtrahend = multiplicationResult;
 
-                step.setMinuend(minuend);
-                step.setSubtrahend(subtrahend);
+				DivisionStep step = new DivisionStep();
 
-                steps.add(step);
+				step.setMinuend(minuend);
+				step.setSubtrahend(subtrahend);
 
-                reminder.replace(0, reminder.length(), String.valueOf(mod));
+				steps.add(step);
 
-                interimReminder = Integer.parseInt(reminder.toString());
-            }
+				reminder.replace(0, reminder.length(), String.valueOf(mod));
 
-            if (i == digitsOfDividend.length - 1) {
-                int minuend = interimReminder;
+				interimReminder = Integer.parseInt(reminder.toString());
+			}
+			if (i == digitsOfDividend.length - 1) {
+				int minuend = interimReminder;
 
-                DivisionStep step = new DivisionStep();
+				DivisionStep step = new DivisionStep();
 
-                step.setMinuend(minuend);
-                steps.add(step);
-            }
-        }
-        return divisionResult;
-    }
+				step.setMinuend(minuend);
+				steps.add(step);
+			}
+		}
+		return divisionResult;
+	}
 }

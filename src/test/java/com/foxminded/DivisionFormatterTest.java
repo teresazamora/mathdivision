@@ -90,13 +90,13 @@ class DivisionFormatterTest {
         expectedResult.append("_10010010|10").append(System.lineSeparator());
         expectedResult.append(" 10      |-------").append(System.lineSeparator());
         expectedResult.append(" --      |1001001").append(System.lineSeparator());
-        expectedResult.append(" _10").append(System.lineSeparator());
-        expectedResult.append("  10").append(System.lineSeparator());
-        expectedResult.append("  --").append(System.lineSeparator());
-        expectedResult.append("  _10").append(System.lineSeparator());
-        expectedResult.append("   10").append(System.lineSeparator());
-        expectedResult.append("   --").append(System.lineSeparator());
-        expectedResult.append("    0");
+        expectedResult.append("   _10").append(System.lineSeparator());
+        expectedResult.append("    10").append(System.lineSeparator());
+        expectedResult.append("    --").append(System.lineSeparator());
+        expectedResult.append("      _10").append(System.lineSeparator());
+        expectedResult.append("       10").append(System.lineSeparator());
+        expectedResult.append("       --").append(System.lineSeparator());
+        expectedResult.append("        0");
         String actualResult = formatter.format(division.divide(10010010, 10));
 
         assertEquals(expectedResult.toString(), actualResult);
